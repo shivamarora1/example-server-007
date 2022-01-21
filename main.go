@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"os"
 )
@@ -23,10 +22,8 @@ func headersHandler(w http.ResponseWriter, req *http.Request) {
 }
 
 func main() {
-	port := os.Args[1]
-	fmt.Printf("Port is %v", port)
 
 	http.HandleFunc("/hello", helloHandler)
 	http.HandleFunc("/headers", headersHandler)
-	http.ListenAndServe(":8090", nil)
+	http.ListenAndServe(":"+os.Getenv("PORT"), nil)
 }
